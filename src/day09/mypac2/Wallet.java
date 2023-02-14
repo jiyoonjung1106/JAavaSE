@@ -8,12 +8,24 @@ public class Wallet {
 		this.totalMoney = 10000;
 	}
 	
-	public synchronized int getMoney() {
+//	public synchronized int getMoney() {
+//		
+//		if(totalMoney ==0)
+//			return 0;
+//		
+//		totalMoney = totalMoney-1;
+//		System.out.println("현재 지갑의 금액: "+ totalMoney);
+//		return 1;
+//	}
+	public int getMoney() {
 		
 		if(totalMoney ==0)
 			return 0;
 		
-		totalMoney = totalMoney-1;
+		synchronized(this) {
+			totalMoney = totalMoney-1;
+		}
+		
 		System.out.println("현재 지갑의 금액: "+ totalMoney);
 		return 1;
 	}
