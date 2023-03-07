@@ -11,7 +11,7 @@ public class MainClass03 {
 	
 	public static void main(String[] args) throws SQLException {
 		Connection conn = null;
-		// Statement 사용하지 말고 PreparedStatement 사용하자!!!
+		// *중요! Statement 사용하지 말고 PreparedStatement 사용하자!!!
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -30,11 +30,13 @@ public class MainClass03 {
 			sql.append("SELECT id, name, salary ");
 			sql.append("FROM sales_reps ");
 			sql.append("WHERE id = ? ");
+			sql.append("AND salary >= ? ");
 			
 			// 4. PrepareStatement 객체 생성
 			pstmt = conn.prepareStatement(sql.toString());
 			
 			pstmt.setInt(1, 2);
+			pstmt.setString(2, "100");
 			
 			// 5. 쿼리 수행
 			rs = pstmt.executeQuery();
